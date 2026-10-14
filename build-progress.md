@@ -21,7 +21,7 @@
 | **Phase 0** | Workspace Scaffolding & Tooling Baseline | `COMPLETED` | 0 | `CP-0: Clean baseline build` (Passed) | `c2ac431` |
 | **Phase 1** | Design System & App Shell | `COMPLETED` | 5 | `CP-1: Shell renders & axe clean` (Passed) | `ed02464` |
 | **Phase 2** | Server Foundation & Shared Libs | `COMPLETED` | 37 | `CP-2a: 80% lib test coverage` (Passed, 97.57%) | `1775232` |
-| **Phase 3** | Provider Adapters, Mocks & Health APIs | `NOT STARTED` | 0 | `CP-2b: Providers & health ok` | Pending |
+| **Phase 3** | Provider Adapters, Mocks & Health APIs | `COMPLETED` | 10 | `CP-2b: Providers & health ok` (Passed) | `b62bf74` |
 | **Phase 4** | Domain Scoring Engine & Route API | `NOT STARTED` | 0 | `CP-3: POST /api/routes valid` | Pending |
 | **Phase 5** | Planner UI & Leaflet Map (Vertical Slice) | `NOT STARTED` | 0 | `CP-4: Golden path works end-to-end`| Pending |
 | **Phase 6** | URL State, Degraded Modes & About Page | `NOT STARTED` | 0 | `CP-4b: Deep links & degraded mode` | Pending |
@@ -41,10 +41,10 @@
 | **F-05** | Detour Limit Presets (Strict, Standard, Flexible) | P0 | Phase 4–5 | `NOT IMPLEMENTED` | Pending |
 | **F-06** | Air Quality Context & Status Chips | P0 | Phase 5 | `NOT IMPLEMENTED` | Pending |
 | **F-07** | Shareable Deep Links & URL State Sync | P0 | Phase 6 | `NOT IMPLEMENTED` | Pending |
-| **F-08** | Graceful Degradation & Status Banners | P0 | Phase 3, 6 | `NOT IMPLEMENTED` | Pending |
+| **F-08** | Graceful Degradation & Status Banners | P0 | Phase 3, 6 | `PARTIALLY IMPLEMENTED` | Provider-level degradation verified |
 | **F-09** | About & Transparent Methodology Page | P0 | Phase 6 | `NOT IMPLEMENTED` | Pending |
-| **F-10** | Local Recents & Preferences Persistence | P0 | Phase 2, 5 | `NOT IMPLEMENTED` | Pending |
-| **F-11** | System & Provider Health API (`/api/health`) | P0 | Phase 3 | `NOT IMPLEMENTED` | Pending |
+| **F-10** | Local Recents & Preferences Persistence | P0 | Phase 2, 5 | `PARTIALLY IMPLEMENTED` | Resilient storage lib verified (T-33) |
+| **F-11** | System & Provider Health API (`/api/health`) | P0 | Phase 3 | `VERIFIED` | Passed unit & integration checks |
 
 ---
 
@@ -69,8 +69,8 @@
 | `T-15` | Coordinates < 50m or > 15km return 422 with specific error code | `PENDING` | Not yet executed |
 | `T-16` | Malformed JSON or unknown keys return 400 `VALIDATION_ERROR` | `PENDING` | Not yet executed |
 | `T-17` | Exceeding 10 req/min on `/api/routes` returns 429 `RATE_LIMITED` | `PENDING` | Not yet executed |
-| `T-18` | Photon failure on typeahead returns 503 without calling Nominatim | `PENDING` | Not yet executed |
-| `T-19` | Explicit search (`explicit=1`) calls Nominatim first with Photon fallback | `PENDING` | Not yet executed |
+| `T-18` | Photon failure on typeahead returns 503 without calling Nominatim | `PASSED` | Verified Nominatim is never invoked on typeahead failure |
+| `T-19` | Explicit search (`explicit=1`) calls Nominatim first with Photon fallback | `PASSED` | Verified fallback path from Nominatim to Photon |
 | `T-20` | Second identical route request returns `meta.cache.routing = "hit"` | `PASSED` | LRU cache store returns cached entry on subsequent get |
 | `T-21` | Concurrent identical requests coalesce into 1 upstream call | `PASSED` | Verified single-flight async coalescing with mock compute |
 | `T-22` | `USE_MOCK_PROVIDERS=true` when `NODE_ENV=production` throws at boot | `PASSED` | Throws Configuration Error when mock is enabled in production |
