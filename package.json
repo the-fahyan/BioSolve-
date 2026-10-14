@@ -15,6 +15,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
+    "verify": "npm run typecheck && npm run lint && npm run test",
     "smoke:live": "tsx scripts/live-smoke.ts",
     "benchmark": "tsx scripts/benchmark.ts"
   },
