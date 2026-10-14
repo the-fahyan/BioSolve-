@@ -167,7 +167,7 @@ export function LocationInput({
           aria-activedescendant={
             activeIndex >= 0 ? `${listboxId}-opt-${activeIndex}` : undefined
           }
-          className="w-full pl-9 pr-20 py-2.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder:text-slate-400 text-slate-900 transition-all"
+          className="w-full pl-9 pr-24 py-2.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder:text-slate-400 text-slate-900 transition-all"
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}

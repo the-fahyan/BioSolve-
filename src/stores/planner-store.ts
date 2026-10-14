@@ -13,6 +13,7 @@ interface PlannerState {
   routesResult: RoutesResponse | null;
   isLoadingRoutes: boolean;
   routeError: string | null;
+  isMobileSheetExpanded: boolean;
 
   setOrigin: (place: Place | null) => void;
   setDestination: (place: Place | null) => void;
@@ -25,6 +26,8 @@ interface PlannerState {
   setRoutesResult: (result: RoutesResponse | null) => void;
   setIsLoadingRoutes: (v: boolean) => void;
   setRouteError: (err: string | null) => void;
+  setIsMobileSheetExpanded: (expanded: boolean) => void;
+  toggleMobileSheet: () => void;
   reset: () => void;
 }
 
@@ -38,6 +41,7 @@ const initialState = {
   routesResult: null,
   isLoadingRoutes: false,
   routeError: null,
+  isMobileSheetExpanded: true,
 };
 
 export const usePlannerStore = create<PlannerState>((set) => ({
@@ -47,8 +51,8 @@ export const usePlannerStore = create<PlannerState>((set) => ({
   setDestination: (place) => set({ destination: place }),
   setDetourLimit: (limit) => set({ detourLimit: limit }),
   setSelectedRouteId: (id) => set({ selectedRouteId: id }),
-  enterPickMode: (field) => set({ pickMode: field }),
-  exitPickMode: () => set({ pickMode: null }),
+  enterPickMode: (field) => set({ pickMode: field, isMobileSheetExpanded: false }),
+  exitPickMode: () => set({ pickMode: null, isMobileSheetExpanded: true }),
   setSheet: (sheet) => set({ sheet }),
   swapOriginDestination: () =>
     set((state) => ({
@@ -59,9 +63,12 @@ export const usePlannerStore = create<PlannerState>((set) => ({
     set({
       routesResult: result,
       selectedRouteId: result?.recommendedRouteId ?? null,
+      isMobileSheetExpanded: false, // auto-collapse when routes arrive per PRD §9.1
     }),
   setIsLoadingRoutes: (v) => set({ isLoadingRoutes: v }),
   setRouteError: (err) => set({ routeError: err }),
+  setIsMobileSheetExpanded: (expanded) => set({ isMobileSheetExpanded: expanded }),
+  toggleMobileSheet: () => set((s) => ({ isMobileSheetExpanded: !s.isMobileSheetExpanded })),
   reset: () => set(initialState),
 }));
 

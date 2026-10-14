@@ -7,6 +7,7 @@ import { RoutesResponse } from "@/lib/schemas";
 import { usePlannerStore } from "@/stores/planner-store";
 import { getAqiMeta } from "@/lib/aqi";
 import { categorizeAqi } from "@/lib/aqi";
+import clsx from "clsx";
 
 // Fix Leaflet default marker icons in webpack builds
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -72,6 +73,9 @@ function FitBoundsController({ result, origin, destination }: FitBoundsProps) {
   const map = useMap();
 
   useEffect(() => {
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+    const paddingBottom = isMobile ? 116 : 48;
+
     if (result) {
       const coords: L.LatLngTuple[] = [];
       for (const route of result.routes) {
@@ -80,18 +84,23 @@ function FitBoundsController({ result, origin, destination }: FitBoundsProps) {
         }
       }
       if (coords.length > 0) {
-        map.fitBounds(L.latLngBounds(coords), { padding: [48, 48] });
+        map.fitBounds(L.latLngBounds(coords), {
+          paddingTopLeft: [48, 48],
+          paddingBottomRight: [48, paddingBottom],
+        });
       }
     } else if (origin && destination) {
       map.fitBounds(
         L.latLngBounds([[origin.lat, origin.lng], [destination.lat, destination.lng]]),
-        { padding: [80, 80] }
+        {
+          paddingTopLeft: [64, 64],
+          paddingBottomRight: [64, paddingBottom],
+        }
       );
     } else if (origin) {
       map.setView([origin.lat, origin.lng], 15);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!!result, origin?.lat, origin?.lng, destination?.lat, destination?.lng]);
+  }, [result, origin, destination, map]);
 
   return null;
 }
@@ -203,23 +212,28 @@ function MarkerLayer({ origin, destination }: MarkerLayerProps) {
 
 // ── AQI Legend ────────────────────────────────────────────────────────────
 
-function AqiLegend() {
+function AqiLegend({ isHiddenOnMobile }: { isHiddenOnMobile: boolean }) {
   const CATS = [
     { label: "Good (0–50)", color: "#15803D" },
     { label: "Moderate (51–100)", color: "#EAB308" },
-    { label: "Sensitive groups (101–150)", color: "#C2410C" },
+    { label: "Sensitive (101–150)", color: "#C2410C" },
     { label: "Unhealthy (151–200)", color: "#B91C1C" },
     { label: "Very unhealthy (201–300)", color: "#7E22CE" },
     { label: "Hazardous (301+)", color: "#7F1D1D" },
   ];
   return (
-    <div className="absolute bottom-6 right-3 z-[1000] bg-white/90 backdrop-blur-sm rounded-xl shadow-md border border-slate-200 px-3 py-2 max-w-[180px]">
+    <div
+      className={clsx(
+        "absolute bottom-[98px] lg:bottom-6 right-3 z-[1000] bg-white/95 backdrop-blur-sm rounded-xl shadow-md border border-slate-200 px-2.5 py-2 max-w-[170px] select-none transition-all",
+        isHiddenOnMobile ? "hidden lg:block" : "block"
+      )}
+    >
       <p className="text-[10px] font-bold text-slate-700 mb-1.5 uppercase tracking-wide">AQI Scale</p>
       <div className="flex flex-col gap-1">
         {CATS.map((c) => (
           <div key={c.label} className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: c.color }} aria-hidden />
-            <span className="text-[9px] text-slate-600 leading-tight">{c.label}</span>
+            <div className="w-2.5 h-2.5 rounded-xs shrink-0" style={{ background: c.color }} aria-hidden />
+            <span className="text-[9px] text-slate-600 leading-tight font-medium">{c.label}</span>
           </div>
         ))}
       </div>
@@ -240,6 +254,7 @@ export default function MapView() {
     exitPickMode,
     setOrigin,
     setDestination,
+    isMobileSheetExpanded,
   } = usePlannerStore();
 
   function handleMapPick(lat: number, lng: number) {
@@ -266,16 +281,15 @@ export default function MapView() {
       {pickMode && (
         <div
           role="status"
-          className="absolute top-3 left-1/2 -translate-x-1/2 z-[1001] bg-teal-700 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg flex items-center gap-2"
+          className="absolute top-3 left-1/2 -translate-x-1/2 z-[1001] bg-teal-800 text-white px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold shadow-xl flex items-center gap-2 max-w-[92vw] text-center"
         >
-          <span>
-            Click the map to set your{" "}
-            {pickMode === "origin" ? "starting location" : "destination"}
+          <span className="truncate">
+            Click map to set {pickMode === "origin" ? "origin" : "destination"}
           </span>
           <button
             type="button"
             onClick={exitPickMode}
-            className="ml-1 text-teal-200 hover:text-white underline text-xs"
+            className="ml-1 text-teal-200 hover:text-white underline text-xs shrink-0"
           >
             Cancel (Esc)
           </button>
@@ -307,7 +321,7 @@ export default function MapView() {
         )}
       </MapContainer>
 
-      {routesResult && <AqiLegend />}
+      {routesResult && <AqiLegend isHiddenOnMobile={isMobileSheetExpanded} />}
     </div>
   );
 }
