@@ -19,7 +19,7 @@
 | Phase | Phase Name | Status | Verified Test Count | Phase Gate Checkpoint | Git Commit Hash |
 |---|---|---|---|---|---|
 | **Phase 0** | Workspace Scaffolding & Tooling Baseline | `COMPLETED` | 0 | `CP-0: Clean baseline build` (Passed) | `c2ac431` |
-| **Phase 1** | Design System & App Shell | `NOT STARTED` | 0 | `CP-1: Shell renders & axe clean` | Pending |
+| **Phase 1** | Design System & App Shell | `COMPLETED` | 5 | `CP-1: Shell renders & axe clean` (Passed) | `ed02464` |
 | **Phase 2** | Server Foundation & Shared Libs | `NOT STARTED` | 0 | `CP-2a: 80% lib test coverage` | Pending |
 | **Phase 3** | Provider Adapters, Mocks & Health APIs | `NOT STARTED` | 0 | `CP-2b: Providers & health ok` | Pending |
 | **Phase 4** | Domain Scoring Engine & Route API | `NOT STARTED` | 0 | `CP-3: POST /api/routes valid` | Pending |
@@ -87,7 +87,7 @@
 | `T-33` | Corrupt client `localStorage` handled gracefully without crash | `PENDING` | Not yet executed |
 | `T-34` | Geolocation permission denial displays inline non-blocking notice | `PENDING` | Not yet executed |
 | `T-35` | Live smoke test asserts walking speed between 3 and 7 km/h | `PENDING` | Not yet executed |
-| `T-36` | Automated contrast test for all design-system token combinations | `PENDING` | Not yet executed |
+| `T-36` | Automated contrast test for all design-system token combinations | `PASSED` | All tokens meet WCAG 2.2 AA contrast (>= 4.5:1) |
 
 ---
 
