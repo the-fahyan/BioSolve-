@@ -1,26 +1,132 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  
+  /* Brand */
+  --color-brand-50: #F0FDFA;
+  --color-brand-100: #CCFBF1;
+  --color-brand-600: #0D9488;
+  --color-brand-700: #0F766E;
+  --color-brand-800: #115E59;
+  --color-brand-900: #134E4A;
+  
+  /* Neutrals */
+  --color-bw-text: #0F172A;
+  --color-bw-muted: #475569;
+  --color-bw-border: #E2E8F0;
+  --color-bw-border-strong: #CBD5E1;
+  --color-bw-bg: #F8FAFC;
+  --color-bw-surface: #FFFFFF;
+  --color-bw-marker-b: #334155;
+  --color-bw-route-muted: #64748B;
+  
+  /* Semantic Statuses */
+  --color-semantic-info-bg: #EFF6FF;
+  --color-semantic-info-border: #BFDBFE;
+  --color-semantic-info-text: #1E3A8A;
+  
+  --color-semantic-warning-bg: #FFFBEB;
+  --color-semantic-warning-border: #FDE68A;
+  --color-semantic-warning-text: #78350F;
+  
+  --color-semantic-error-bg: #FEF2F2;
+  --color-semantic-error-border: #FECACA;
+  --color-semantic-error-text: #7F1D1D;
+  
+  --color-semantic-success-bg: #F0FDF4;
+  --color-semantic-success-border: #BBF7D0;
+  --color-semantic-success-text: #14532D;
+  
+  /* Route Tag Chips */
+  --color-tag-fastest-bg: #DBEAFE;
+  --color-tag-fastest-text: #1E3A8A;
+  --color-tag-cleanest-bg: #DCFCE7;
+  --color-tag-cleanest-text: #14532D;
+  --color-tag-balanced-bg: #FEF3C7;
+  --color-tag-balanced-text: #78350F;
+  
+  /* US AQI / Exposure Index Categories */
+  --color-aqi-good: #15803D;
+  --color-aqi-moderate: #EAB308;
+  --color-aqi-usg: #C2410C;
+  --color-aqi-unhealthy: #B91C1C;
+  --color-aqi-very-unhealthy: #7E22CE;
+  --color-aqi-hazardous: #7F1D1D;
+  
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bw-brand-50: #F0FDFA;
+  --bw-brand-100: #CCFBF1;
+  --bw-brand-600: #0D9488;
+  --bw-brand-700: #0F766E;
+  --bw-brand-800: #115E59;
+  --bw-brand-900: #134E4A;
+  
+  --bw-text: #0F172A;
+  --bw-text-muted: #475569;
+  --bw-border: #E2E8F0;
+  --bw-border-strong: #CBD5E1;
+  --bw-bg: #F8FAFC;
+  --bw-surface: #FFFFFF;
+  --bw-marker-b: #334155;
+  --bw-route-muted: #64748B;
+  
+  --bw-info-bg: #EFF6FF;
+  --bw-info-border: #BFDBFE;
+  --bw-info-text: #1E3A8A;
+  
+  --bw-warning-bg: #FFFBEB;
+  --bw-warning-border: #FDE68A;
+  --bw-warning-text: #78350F;
+  
+  --bw-error-bg: #FEF2F2;
+  --bw-error-border: #FECACA;
+  --bw-error-text: #7F1D1D;
+  
+  --bw-success-bg: #F0FDF4;
+  --bw-success-border: #BBF7D0;
+  --bw-success-text: #14532D;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bw-bg);
+  color: var(--bw-text);
+  font-family: var(--font-sans);
+  min-height: 100%;
+}
+
+/* Tabular numbers for clean numeric metrics alignment */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Accessible focus styling */
+:focus-visible {
+  outline: 2px solid var(--bw-brand-700);
+  outline-offset: 2px;
+}
+
+/* Map isolation helper so leaflet internal z-indexes remain contained */
+.map-isolate {
+  isolation: isolate;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

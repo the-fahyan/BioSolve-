@@ -1,69 +1,65 @@
-import Image from "next/image";
+import { Sparkles, MapPin, Wind } from "lucide-react";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main id="main-content" className="flex-1 flex flex-col lg:flex-row h-[calc(100vh-3.5rem)] overflow-hidden">
+      {/* Left Planning Panel (Desktop >= 1024px) */}
+      <section
+        id="results-panel"
+        aria-label="Trip Planner & Routes"
+        className="w-full lg:w-[420px] shrink-0 bg-white border-r border-slate-200 flex flex-col h-full overflow-y-auto z-10 shadow-xs"
+      >
+        <div className="p-5 border-b border-slate-100">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-semibold mb-2.5">
+            <Sparkles className="w-3.5 h-3.5 text-teal-600" aria-hidden="true" />
+            <span>Eco-Route Walking Navigation</span>
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 mb-1">
+            Plan your clean-air walk
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-sm text-slate-500 leading-relaxed">
+            Compare pedestrian routes scored by real-time air quality and road traffic proximity.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Placeholder trip planner container to be wired in Phase 5 */}
+        <div className="p-5 flex-1 flex flex-col gap-4">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 text-slate-600 text-sm">
+              <MapPin className="w-5 h-5 text-teal-600 shrink-0" aria-hidden="true" />
+              <span>Select starting location</span>
+            </div>
+            <div className="flex items-center gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 text-slate-600 text-sm">
+              <MapPin className="w-5 h-5 text-slate-600 shrink-0" aria-hidden="true" />
+              <span>Select destination</span>
+            </div>
+          </div>
+
+          <div className="mt-auto pt-6 text-xs text-slate-400 border-t border-slate-100 flex items-center justify-between">
+            <span>Powered by OpenStreetMap & Open-Meteo</span>
+            <span className="tabular-nums">v1.0.0</span>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Map Viewport Container */}
+      <section
+        id="map-container"
+        aria-label="Interactive Route Map"
+        className="flex-1 h-full relative bg-slate-100 flex items-center justify-center map-isolate"
+      >
+        <div className="text-center p-6 text-slate-400 flex flex-col items-center gap-3">
+          <div className="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center text-teal-700">
+            <Wind className="w-6 h-6 animate-pulse" aria-hidden="true" />
+          </div>
+          <div>
+            <p className="font-semibold text-slate-700 text-base">Interactive Map Engine</p>
+            <p className="text-sm text-slate-500 mt-0.5">
+              Enter your origin and destination to preview walking paths and air quality layers.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

@@ -18,7 +18,7 @@
 
 | Phase | Phase Name | Status | Verified Test Count | Phase Gate Checkpoint | Git Commit Hash |
 |---|---|---|---|---|---|
-| **Phase 0** | Workspace Scaffolding & Tooling Baseline | `NOT STARTED` | 0 | `CP-0: Clean baseline build` | Pending |
+| **Phase 0** | Workspace Scaffolding & Tooling Baseline | `COMPLETED` | 0 | `CP-0: Clean baseline build` (Passed) | `c2ac431` |
 | **Phase 1** | Design System & App Shell | `NOT STARTED` | 0 | `CP-1: Shell renders & axe clean` | Pending |
 | **Phase 2** | Server Foundation & Shared Libs | `NOT STARTED` | 0 | `CP-2a: 80% lib test coverage` | Pending |
 | **Phase 3** | Provider Adapters, Mocks & Health APIs | `NOT STARTED` | 0 | `CP-2b: Providers & health ok` | Pending |
