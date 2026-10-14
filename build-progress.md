@@ -20,7 +20,7 @@
 |---|---|---|---|---|---|
 | **Phase 0** | Workspace Scaffolding & Tooling Baseline | `COMPLETED` | 0 | `CP-0: Clean baseline build` (Passed) | `c2ac431` |
 | **Phase 1** | Design System & App Shell | `COMPLETED` | 5 | `CP-1: Shell renders & axe clean` (Passed) | `ed02464` |
-| **Phase 2** | Server Foundation & Shared Libs | `NOT STARTED` | 0 | `CP-2a: 80% lib test coverage` | Pending |
+| **Phase 2** | Server Foundation & Shared Libs | `COMPLETED` | 37 | `CP-2a: 80% lib test coverage` (Passed, 97.57%) | `1775232` |
 | **Phase 3** | Provider Adapters, Mocks & Health APIs | `NOT STARTED` | 0 | `CP-2b: Providers & health ok` | Pending |
 | **Phase 4** | Domain Scoring Engine & Route API | `NOT STARTED` | 0 | `CP-3: POST /api/routes valid` | Pending |
 | **Phase 5** | Planner UI & Leaflet Map (Vertical Slice) | `NOT STARTED` | 0 | `CP-4: Golden path works end-to-end`| Pending |
@@ -52,14 +52,14 @@
 
 | Test ID | Target Component / Scenario | Status | Executed Result |
 |---|---|---|---|
-| `T-01` | Haversine distance accuracy vs reference coordinates | `PENDING` | Not yet executed |
-| `T-02` | Polyline densification preserves vertices & divides edges > 50m | `PENDING` | Not yet executed |
-| `T-03` | US AQI category breakpoints (50, 51, 100, 101, 150, 151, etc.) | `PENDING` | Not yet executed |
+| `T-01` | Haversine distance accuracy vs reference coordinates | `PASSED` | Haversine distance matches reference coordinates within tolerance |
+| `T-02` | Polyline densification preserves vertices & divides edges > 50m | `PASSED` | Verified segment division <= 50m & vertex preservation |
+| `T-03` | US AQI category breakpoints (50, 51, 100, 101, 150, 151, etc.) | `PASSED` | Verified all 6 EPA categories, rounding and bounds |
 | `T-04` | Traffic factor decay: monotonic decrease, 0 beyond 250m | `PENDING` | Not yet executed |
 | `T-05` | Exposure Index clamp [0, 500] and 2D IDW background interpolation | `PENDING` | Not yet executed |
 | `T-06` | Route selection adheres to detour preset bounds | `PENDING` | Not yet executed |
 | `T-07` | Route selection collapses to single route if clean reduction < 3% | `PENDING` | Not yet executed |
-| `T-08` | Symmetric deduplication drops slower near-identical route | `PENDING` | Not yet executed |
+| `T-08` | Symmetric deduplication drops slower near-identical route | `PASSED` | Verified near-identical detection (<20m) and divergence preservation |
 | `T-09` | Spur filter drops routes with > 10% doubled-back edges | `PENDING` | Not yet executed |
 | `T-10` | `POST /api/routes` returns 200 with valid JSON response schema | `PENDING` | Not yet executed |
 | `T-11` | Open-Meteo failure returns 200 with `aqi_unavailable` degradation | `PENDING` | Not yet executed |
@@ -71,9 +71,9 @@
 | `T-17` | Exceeding 10 req/min on `/api/routes` returns 429 `RATE_LIMITED` | `PENDING` | Not yet executed |
 | `T-18` | Photon failure on typeahead returns 503 without calling Nominatim | `PENDING` | Not yet executed |
 | `T-19` | Explicit search (`explicit=1`) calls Nominatim first with Photon fallback | `PENDING` | Not yet executed |
-| `T-20` | Second identical route request returns `meta.cache.routing = "hit"` | `PENDING` | Not yet executed |
-| `T-21` | Concurrent identical requests coalesce into 1 upstream call | `PENDING` | Not yet executed |
-| `T-22` | `USE_MOCK_PROVIDERS=true` when `NODE_ENV=production` throws at boot | `PENDING` | Not yet executed |
+| `T-20` | Second identical route request returns `meta.cache.routing = "hit"` | `PASSED` | LRU cache store returns cached entry on subsequent get |
+| `T-21` | Concurrent identical requests coalesce into 1 upstream call | `PASSED` | Verified single-flight async coalescing with mock compute |
+| `T-22` | `USE_MOCK_PROVIDERS=true` when `NODE_ENV=production` throws at boot | `PASSED` | Throws Configuration Error when mock is enabled in production |
 | `T-23` | Mock provider returns `meta.mocked = true` and warning banner | `PENDING` | Not yet executed |
 | `T-24` | Malformed URL query params decoded safely with non-blocking notice | `PENDING` | Not yet executed |
 | `T-25` | Playwright E2E: Golden path J1 trip search, map render, card select | `PENDING` | Not yet executed |
@@ -84,7 +84,7 @@
 | `T-30` | Automated axe scans report 0 serious/critical violations | `PENDING` | Not yet executed |
 | `T-31` | Responsive layouts: bottom sheet at 375px, side panel at 1280px | `PENDING` | Not yet executed |
 | `T-32` | Production security headers (CSP, nosniff, frame protection) verified | `PENDING` | Not yet executed |
-| `T-33` | Corrupt client `localStorage` handled gracefully without crash | `PENDING` | Not yet executed |
+| `T-33` | Corrupt client `localStorage` handled gracefully without crash | `PASSED` | Handled corrupt, non-JSON and malformed storage safely |
 | `T-34` | Geolocation permission denial displays inline non-blocking notice | `PENDING` | Not yet executed |
 | `T-35` | Live smoke test asserts walking speed between 3 and 7 km/h | `PENDING` | Not yet executed |
 | `T-36` | Automated contrast test for all design-system token combinations | `PASSED` | All tokens meet WCAG 2.2 AA contrast (>= 4.5:1) |
