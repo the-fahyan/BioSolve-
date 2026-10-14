@@ -8,6 +8,7 @@
 | **Primary reader** | AI coding agent in Google Antigravity (source of truth), plus the hackathon team |
 | **Hackathon theme** | UN SDG 3 — Good Health and Well-being (Target 3.9: reduce illness from air pollution) |
 | **Mandated stack** | Next.js, OpenStreetMap / Leaflet, Node.js |
+| **Companion Documents** | [architecture.md](file:///g:/work%20space/BioSolve-/architecture.md), [build-rule.md](file:///g:/work%20space/BioSolve-/build-rule.md), [implementation-plan.md](file:///g:/work%20space/BioSolve-/implementation-plan.md), [build-progress.md](file:///g:/work%20space/BioSolve-/build-progress.md) |
 
 **Conventions.** Requirement IDs look like `FR-02.3` (functional, feature 02, item 3) and `NFR-07`. Priorities: **P0** = MVP, must ship; **P1** = should ship if time allows; **P2** = future. "MUST/SHOULD/MAY" follow RFC 2119. All coordinates are WGS84. GeoJSON order is `[lng, lat]`; app-level objects use `{ lat, lng }`.
 
@@ -851,8 +852,15 @@ LOG_LEVEL=info
 
 ### 11.5 Directory and file structure
 
+All project files reside directly in the workspace root `./` (`g:\work space\BioSolve-`). Do NOT scaffold into a nested subdirectory.
+
 ```
-breatheway/
+./                               Workspace root
+├─ PRD.md                        Product Requirements Document
+├─ architecture.md               System Architecture & Technical Specifications
+├─ build-rule.md                 AI Coding Agent Development Rules & Execution Guardrails
+├─ implementation-plan.md        Phased Roadmap, Task Breakdown & Traceability Matrix
+├─ build-progress.md             Verified Implementation Tracking Ledger
 ├─ .env.example                  Documented env vars (no secrets)
 ├─ .nvmrc                        22
 ├─ README.md                     Setup, scripts, env, known limitations
@@ -1164,9 +1172,11 @@ export const RouteResultSchema = z.object({
   geometry: z.object({ type: z.literal("LineString"), coordinates: z.array(z.tuple([z.number(), z.number()])).min(2) }),
   exposure: z.array(z.number()).nullable(),
 });
-// RoutesResponseSchema uses `background: BackgroundAqiSchema.nullable()` (null only when `aqi_unavailable`).
-// AqiReadingSchema, GeocodeResponseSchema, ReverseResponseSchema, ErrorEnvelopeSchema
-// are defined analogously and MUST match §13 exactly. Export inferred types with z.infer.
+
+// The complete, normative Zod 4 schemas for all entities (RoutesResponseSchema, GeocodeResponseSchema,
+// ReverseGeocodeResponseSchema, AqiReadingSchema, HealthResponseSchema, ErrorEnvelopeSchema, and storage schemas)
+// are defined in full without placeholders in architecture.md §3 and implemented in src/lib/schemas.ts.
+// All inferred TypeScript types are exported using z.infer.
 ```
 
 **Internal (server-only) types:** `Candidate { id, source: "base"|"alternative"|"via", coordinates: [number, number][], distanceM, durationS }`; `RoadSegment { a: [number, number], b: [number, number], weight: number }`; `RoadIndex { nearest(lng, lat, radiusM): { weight: number, distanceM: number } | null }`.
@@ -1671,7 +1681,7 @@ The final message must contain: (a) features completed, by FR/AC IDs; (b) anythi
 
 ### 21.5 Kickoff prompt (paste into Antigravity)
 
-> Read `PRD.md` fully. Follow §21 exactly. Start with Phase 0: inspect the workspace and report what you find, then produce an implementation plan and task list mapped to §20. Build phase by phase, running the test-and-fix loop after every meaningful change, committing after each phase, and keeping `docs/deviations.md` updated. Do not use mock data in the real flow. Finish with the honest final summary described in §21.4.
+> Read `PRD.md`, `architecture.md`, `build-rule.md`, `implementation-plan.md`, and `build-progress.md` fully. Follow `build-rule.md` and PRD §21 exactly. Start with Phase 0 in `implementation-plan.md`: inspect the workspace and report what you find, initialize the repository directly at `./`, and build phase by phase following the test-and-fix loop (`typecheck` -> `lint` -> `test` -> `build`). Update `build-progress.md` after each verified task and checkpoint. Do not use mock data in the real flow. Finish with the honest final summary described in §21.4.
 
 ---
 
