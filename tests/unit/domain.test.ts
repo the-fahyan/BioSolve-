@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { generateCandidates } from "@/server/domain/candidates";
 import { computeExposureScores } from "@/server/domain/exposure";
 import { selectRoutes, ScoredCandidate } from "@/server/domain/select";
@@ -138,8 +138,7 @@ describe("T-06: Route selection detour bounds", () => {
     const result = selectRoutes(
       [fastest, withinStrict, overStrict],
       "strict",
-      true,
-      []
+      true
     );
 
     const ids = result.routes.map((r) => r.id);
@@ -153,8 +152,7 @@ describe("T-06: Route selection detour bounds", () => {
     const result = selectRoutes(
       [fastest, longClean],
       "flexible",
-      true,
-      []
+      true
     );
 
     const ids = result.routes.map((r) => r.id);
@@ -200,7 +198,7 @@ describe("T-07: Minimum 3% reduction rule", () => {
       },
     ];
 
-    const result = selectRoutes(candidates, "standard", true, []);
+    const result = selectRoutes(candidates, "standard", true);
 
     expect(result.routes).toHaveLength(1);
     expect(result.routes[0]?.tags).toContain("fastest");

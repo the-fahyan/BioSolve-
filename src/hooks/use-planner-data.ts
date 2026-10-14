@@ -18,11 +18,10 @@ export function useGeocodeSearch({ query, bias, explicit, enabled = true }: Geoc
   const [debouncedQuery, setDebouncedQuery] = useState(query);
 
   useEffect(() => {
-    if (!explicit && query.length < 3) {
-      setDebouncedQuery("");
-      return;
-    }
-    const timer = setTimeout(() => setDebouncedQuery(query), 350);
+    const delay = !explicit && query.length < 3 ? 0 : 350;
+    const timer = setTimeout(() => {
+      setDebouncedQuery(!explicit && query.length < 3 ? "" : query);
+    }, delay);
     return () => clearTimeout(timer);
   }, [query, explicit]);
 
@@ -140,7 +139,7 @@ interface GeolocationState {
   position: LatLng | null;
   error: string | null;
   loading: boolean;
-  getCurrentPosition: () => void;
+  getCurrentPosition: (onSuccess?: (pos: LatLng) => void) => void;
 }
 
 export function useGeolocation(): GeolocationState {
@@ -148,7 +147,7 @@ export function useGeolocation(): GeolocationState {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const getCurrentPosition = useCallback(() => {
+  const getCurrentPosition = useCallback((onSuccess?: (pos: LatLng) => void) => {
     if (!navigator.geolocation) {
       setError("Geolocation is not supported by your browser.");
       return;
@@ -157,8 +156,10 @@ export function useGeolocation(): GeolocationState {
     setError(null);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setPosition(coords);
         setLoading(false);
+        onSuccess?.(coords);
       },
       (err) => {
         if (err.code === err.PERMISSION_DENIED) {

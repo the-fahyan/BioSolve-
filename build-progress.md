@@ -22,11 +22,11 @@
 | **Phase 1** | Design System & App Shell | `COMPLETED` | 5 | `CP-1: Shell renders & axe clean` (Passed) | `ed02464` |
 | **Phase 2** | Server Foundation & Shared Libs | `COMPLETED` | 37 | `CP-2a: 80% lib test coverage` (Passed, 97.57%) | `1775232` |
 | **Phase 3** | Provider Adapters, Mocks & Health APIs | `COMPLETED` | 10 | `CP-2b: Providers & health ok` (Passed) | `b62bf74` |
-| **Phase 4** | Domain Scoring Engine & Route API | `COMPLETED` | 7 | `CP-3: POST /api/routes valid` (Passed) | Pending commit |
-| **Phase 5** | Planner UI & Leaflet Map (Vertical Slice) | `COMPLETED` | 0 E2E | `CP-4: Golden path works end-to-end` (Build verified) | Pending commit |
-| **Phase 6** | URL State, Degraded Modes & About Page | `COMPLETED` | — | `CP-4b: Deep links & degraded mode` (Implemented) | Pending commit |
-| **Phase 7** | WCAG 2.2 AA A11y, Responsive & Hardening | `COMPLETED` | — | `CP-5: 0 axe errors, 80% coverage` (Tokens verified) | Pending commit |
-| **Phase 8** | Production CSP, Benchmarks & Deployment | `COMPLETED` | — | `CP-6: Production release gate` (Build passed) | Pending commit |
+| **Phase 4** | Domain Scoring Engine & Route API | `COMPLETED` | 7 | `CP-3: POST /api/routes valid` (Passed) | `a6243d7` |
+| **Phase 5** | Planner UI & Leaflet Map (Vertical Slice) | `COMPLETED` | 0 E2E | `CP-4: Golden path works end-to-end` (Build verified) | `a6243d7` |
+| **Phase 6** | URL State, Degraded Modes & About Page | `COMPLETED` | — | `CP-4b: Deep links & degraded mode` (Implemented) | `a6243d7` |
+| **Phase 7** | WCAG 2.2 AA A11y, Responsive & Hardening | `COMPLETED` | — | `CP-5: 0 axe errors, 80% coverage` (Tokens verified) | `a6243d7` |
+| **Phase 8** | Production CSP, Benchmarks & Deployment | `COMPLETED` | — | `CP-6: Production release gate` (Build passed) | `a6243d7` |
 
 ---
 

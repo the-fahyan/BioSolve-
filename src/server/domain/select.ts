@@ -1,10 +1,8 @@
 import "server-only";
 import { DetourLimit, RouteResult, RouteTag } from "@/lib/schemas";
 import { EXPOSURE_CONFIG } from "@/lib/exposure-config";
-import { haversineDistance } from "@/lib/geo";
 import { ExposureScores } from "./exposure";
 import { RawRouteCandidate } from "../providers/types";
-import { AqiGridSample } from "../providers/types";
 
 export interface ScoredCandidate {
   raw: RawRouteCandidate;
@@ -30,8 +28,7 @@ const DETOUR_MULTIPLIERS: Record<DetourLimit, number> = {
 export function selectRoutes(
   candidates: ScoredCandidate[],
   detourLimit: DetourLimit,
-  aqiAvailable: boolean,
-  _aqiSamples: AqiGridSample[]
+  aqiAvailable: boolean
 ): RouteSelectionResult {
   if (candidates.length === 0) {
     throw new Error("No candidates to select from");

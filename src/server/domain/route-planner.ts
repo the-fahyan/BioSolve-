@@ -225,8 +225,7 @@ export async function planRoutes(
   const { routes, recommendedRouteId } = selectRoutes(
     scoredCandidates,
     detourLimit,
-    aqiAvailable,
-    aqiSamples
+    aqiAvailable
   );
 
   // ── 6. Build background AQI aggregate ───────────────────────────────────

@@ -51,10 +51,12 @@ export function LocationInput({
           kind: "recent",
         }));
 
-  // Sync input with external value changes
-  useEffect(() => {
+  // Sync input with external value changes during render
+  const [prevValue, setPrevValue] = useState(value);
+  if (value !== prevValue) {
+    setPrevValue(value);
     setInputValue(value?.label ?? "");
-  }, [value]);
+  }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(e.target.value);
@@ -110,19 +112,15 @@ export function LocationInput({
   }
 
   function handleLocate() {
-    geo.getCurrentPosition();
-  }
-
-  useEffect(() => {
-    if (geo.position) {
+    geo.getCurrentPosition((pos) => {
       onChange({
-        lat: geo.position.lat,
-        lng: geo.position.lng,
+        lat: pos.lat,
+        lng: pos.lng,
         label: "My location",
       });
       setInputValue("My location");
-    }
-  }, [geo.position, onChange]);
+    });
+  }
 
   // Close on outside click
   useEffect(() => {
