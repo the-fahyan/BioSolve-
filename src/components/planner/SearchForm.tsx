@@ -94,6 +94,30 @@ export function SearchForm({ onSubmit, isLoading }: SearchFormProps) {
           </>
         )}
       </button>
+
+      {/* Quick-start demo walk */}
+      {!origin && !destination && (
+        <div className="text-center pt-0.5">
+          <button
+            type="button"
+            onClick={() => {
+              setOrigin({
+                lat: 51.5055,
+                lng: -0.0754,
+                label: "Tower Bridge, London",
+              });
+              setDestination({
+                lat: 51.5138,
+                lng: -0.0984,
+                label: "St Paul's Cathedral, London",
+              });
+            }}
+            className="text-xs text-teal-700 hover:text-teal-900 font-medium hover:underline inline-flex items-center gap-1 cursor-pointer py-1"
+          >
+            <span>Try sample route: Tower Bridge → St Paul&apos;s</span>
+          </button>
+        </div>
+      )}
     </form>
   );
 }

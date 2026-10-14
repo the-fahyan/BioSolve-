@@ -35,7 +35,10 @@ export function useGeocodeSearch({ query, bias, explicit, enabled = true }: Geoc
       }
       if (explicit) params.set("explicit", "1");
 
-      const res = await fetch(`/api/geocode?${params.toString()}`, { signal });
+      const res = await fetch(`/api/geocode?${params.toString()}`, {
+        signal,
+        headers: { "bypass-tunnel-reminder": "true" },
+      });
       if (!res.ok) throw new Error("Geocode search failed");
       return res.json() as Promise<GeocodeResponse>;
     },
@@ -58,7 +61,10 @@ export function useReverseGeocode(coord: LatLng | null) {
         lat: String(coord.lat),
         lng: String(coord.lng),
       });
-      const res = await fetch(`/api/geocode/reverse?${params.toString()}`, { signal });
+      const res = await fetch(`/api/geocode/reverse?${params.toString()}`, {
+        signal,
+        headers: { "bypass-tunnel-reminder": "true" },
+      });
       if (!res.ok) throw new Error("Reverse geocode failed");
       return res.json() as Promise<ReverseGeocodeResponse>;
     },
@@ -81,7 +87,10 @@ export function useAqi(coord: LatLng | null) {
         lat: String(coord.lat),
         lng: String(coord.lng),
       });
-      const res = await fetch(`/api/aqi?${params.toString()}`, { signal });
+      const res = await fetch(`/api/aqi?${params.toString()}`, {
+        signal,
+        headers: { "bypass-tunnel-reminder": "true" },
+      });
       if (!res.ok) throw new Error("AQI fetch failed");
       return res.json();
     },
@@ -107,7 +116,10 @@ export function useRouteMutation() {
 
       const res = await fetch("/api/routes", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "bypass-tunnel-reminder": "true",
+        },
         body: JSON.stringify(request),
         signal: abortRef.current.signal,
       });
