@@ -3,96 +3,130 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  
-  /* Brand */
-  --color-brand-50: #F0FDFA;
+
+  /* ── Brand Palette ─────────────────────────────────────────────── */
+  --color-brand-50:  #F0FDFA;
   --color-brand-100: #CCFBF1;
+  --color-brand-200: #99F6E4;
+  --color-brand-300: #5EEAD4;
+  --color-brand-400: #2DD4BF;
+  --color-brand-500: #14B8A6;
   --color-brand-600: #0D9488;
   --color-brand-700: #0F766E;
   --color-brand-800: #115E59;
   --color-brand-900: #134E4A;
-  
-  /* Neutrals */
-  --color-bw-text: #0F172A;
-  --color-bw-muted: #475569;
-  --color-bw-border: #E2E8F0;
+  --color-brand-950: #042F2E;
+
+  /* ── Neutral Tokens ────────────────────────────────────────────── */
+  --color-bw-text:          #0F172A;
+  --color-bw-text-secondary:#334155;
+  --color-bw-muted:         #64748B;
+  --color-bw-border:        #E2E8F0;
   --color-bw-border-strong: #CBD5E1;
-  --color-bw-bg: #F8FAFC;
-  --color-bw-surface: #FFFFFF;
-  --color-bw-marker-b: #334155;
-  --color-bw-route-muted: #64748B;
-  
-  /* Semantic Statuses */
-  --color-semantic-info-bg: #EFF6FF;
+  --color-bw-bg:            #F8FAFC;
+  --color-bw-surface:       #FFFFFF;
+  --color-bw-surface-alt:   #F1F5F9;
+  --color-bw-marker-b:      #334155;
+  --color-bw-route-muted:   #94A3B8;
+
+  /* ── Semantic Statuses ─────────────────────────────────────────── */
+  --color-semantic-info-bg:     #EFF6FF;
   --color-semantic-info-border: #BFDBFE;
-  --color-semantic-info-text: #1E3A8A;
-  
-  --color-semantic-warning-bg: #FFFBEB;
+  --color-semantic-info-text:   #1E3A8A;
+
+  --color-semantic-warning-bg:     #FFFBEB;
   --color-semantic-warning-border: #FDE68A;
-  --color-semantic-warning-text: #78350F;
-  
-  --color-semantic-error-bg: #FEF2F2;
+  --color-semantic-warning-text:   #78350F;
+
+  --color-semantic-error-bg:     #FEF2F2;
   --color-semantic-error-border: #FECACA;
-  --color-semantic-error-text: #7F1D1D;
-  
-  --color-semantic-success-bg: #F0FDF4;
+  --color-semantic-error-text:   #7F1D1D;
+
+  --color-semantic-success-bg:     #F0FDF4;
   --color-semantic-success-border: #BBF7D0;
-  --color-semantic-success-text: #14532D;
-  
-  /* Route Tag Chips */
-  --color-tag-fastest-bg: #DBEAFE;
+  --color-semantic-success-text:   #14532D;
+
+  /* ── Route Tag Chips ────────────────────────────────────────────── */
+  --color-tag-fastest-bg:   #DBEAFE;
   --color-tag-fastest-text: #1E3A8A;
-  --color-tag-cleanest-bg: #DCFCE7;
-  --color-tag-cleanest-text: #14532D;
-  --color-tag-balanced-bg: #FEF3C7;
-  --color-tag-balanced-text: #78350F;
-  
-  /* US AQI / Exposure Index Categories */
-  --color-aqi-good: #15803D;
-  --color-aqi-moderate: #EAB308;
-  --color-aqi-usg: #C2410C;
-  --color-aqi-unhealthy: #B91C1C;
-  --color-aqi-very-unhealthy: #7E22CE;
-  --color-aqi-hazardous: #7F1D1D;
-  
-  /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  --color-tag-cleanest-bg:  #DCFCE7;
+  --color-tag-cleanest-text:#14532D;
+  --color-tag-balanced-bg:  #FEF3C7;
+  --color-tag-balanced-text:#78350F;
+
+  /* ── US AQI Colors ──────────────────────────────────────────────── */
+  --color-aqi-good:         #15803D;
+  --color-aqi-moderate:     #EAB308;
+  --color-aqi-usg:          #C2410C;
+  --color-aqi-unhealthy:    #B91C1C;
+  --color-aqi-very-unhealthy:#7E22CE;
+  --color-aqi-hazardous:    #7F1D1D;
+
+  /* ── Radii ─────────────────────────────────────────────────────── */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+
+  /* ── Shadows ───────────────────────────────────────────────────── */
+  --shadow-xs:  0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-sm:  0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-xl:  0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.18);
+  --shadow-glow:0 0 0 3px rgb(13 148 136 / 0.15);
 }
 
 :root {
-  --bw-brand-50: #F0FDFA;
+  /* ── CSS Custom Props for non-Tailwind usage ─────────────────── */
+  --bw-brand-50:  #F0FDFA;
   --bw-brand-100: #CCFBF1;
+  --bw-brand-200: #99F6E4;
+  --bw-brand-500: #14B8A6;
   --bw-brand-600: #0D9488;
   --bw-brand-700: #0F766E;
   --bw-brand-800: #115E59;
   --bw-brand-900: #134E4A;
-  
-  --bw-text: #0F172A;
-  --bw-text-muted: #475569;
-  --bw-border: #E2E8F0;
+
+  --bw-text:          #0F172A;
+  --bw-text-muted:    #64748B;
+  --bw-border:        #E2E8F0;
   --bw-border-strong: #CBD5E1;
-  --bw-bg: #F8FAFC;
-  --bw-surface: #FFFFFF;
-  --bw-marker-b: #334155;
-  --bw-route-muted: #64748B;
-  
-  --bw-info-bg: #EFF6FF;
+  --bw-bg:            #F8FAFC;
+  --bw-surface:       #FFFFFF;
+  --bw-marker-b:      #334155;
+  --bw-route-muted:   #94A3B8;
+
+  --bw-info-bg:     #EFF6FF;
   --bw-info-border: #BFDBFE;
-  --bw-info-text: #1E3A8A;
-  
-  --bw-warning-bg: #FFFBEB;
+  --bw-info-text:   #1E3A8A;
+
+  --bw-warning-bg:     #FFFBEB;
   --bw-warning-border: #FDE68A;
-  --bw-warning-text: #78350F;
-  
-  --bw-error-bg: #FEF2F2;
+  --bw-warning-text:   #78350F;
+
+  --bw-error-bg:     #FEF2F2;
   --bw-error-border: #FECACA;
-  --bw-error-text: #7F1D1D;
-  
-  --bw-success-bg: #F0FDF4;
+  --bw-error-text:   #7F1D1D;
+
+  --bw-success-bg:     #F0FDF4;
   --bw-success-border: #BBF7D0;
-  --bw-success-text: #14532D;
+  --bw-success-text:   #14532D;
+
+  /* Animation timing */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ── Base Resets ───────────────────────────────────────────────── */
+*,
+::before,
+::after {
+  box-sizing: border-box;
 }
 
 html,
@@ -101,25 +135,196 @@ body {
   color: var(--bw-text);
   font-family: var(--font-sans);
   min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Tabular numbers for clean numeric metrics alignment */
+/* ── Smooth Scroll ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Tabular Numbers ────────────────────────────────────────────── */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* Accessible focus styling */
+/* ── Focus Visible ─────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--bw-brand-700);
+  outline: 2px solid var(--bw-brand-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Accessible Focus for interactive elements ──────────────────── */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--bw-brand-600);
   outline-offset: 2px;
 }
 
-/* Map isolation helper so leaflet internal z-indexes remain contained */
+/* ── Map Isolation ─────────────────────────────────────────────── */
 .map-isolate {
   isolation: isolate;
 }
 
-/* Respect user's motion preferences */
+/* ── Custom Scrollbar ──────────────────────────────────────────── */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bw-border-strong) transparent;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--bw-border-strong);
+  border-radius: 99px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bw-brand-300);
+}
+
+/* ── Glassmorphism Panel ────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+/* ── Gradient Text ──────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--bw-brand-600), var(--bw-brand-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Brand Gradient BG ──────────────────────────────────────────── */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--bw-brand-700) 0%, var(--bw-brand-500) 100%);
+}
+
+/* ── Card Hover Effect ──────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out), border-color 0.15s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -4px rgba(0,0,0,0.10);
+}
+
+/* ── Animated Shimmer Skeleton ──────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #f1f5f9 25%,
+    #e2e8f0 50%,
+    #f1f5f9 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* ── Fade-in Animation ──────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s var(--ease-out) both;
+}
+
+/* ── Slide-up for bottom sheet ──────────────────────────────────── */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+/* ── Pulse Dot (live indicator) ─────────────────────────────────── */
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
+
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+/* ── Exposure Bar ───────────────────────────────────────────────── */
+.exposure-bar {
+  height: 4px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: #E2E8F0;
+}
+
+.exposure-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s var(--ease-out);
+}
+
+/* ── Leaflet control styling overrides ──────────────────────────── */
+.leaflet-control-attribution {
+  font-size: 9px !important;
+  background: rgba(255,255,255,0.8) !important;
+  backdrop-filter: blur(8px);
+}
+
+.leaflet-control-zoom {
+  border: none !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background: white !important;
+  color: #334155 !important;
+  font-size: 16px !important;
+  line-height: 30px !important;
+  width: 34px !important;
+  height: 34px !important;
+  transition: background 0.15s ease !important;
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+  background: #f0fdfa !important;
+  color: #0f766e !important;
+}
+
+/* ── Pick Mode Map Cursor ───────────────────────────────────────── */
+.map-pick-cursor .leaflet-container {
+  cursor: crosshair !important;
+}
+
+/* ── Reduced Motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -129,4 +334,13 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ── Responsive Utility Helpers ─────────────────────────────────── */
+@media (max-width: 767px) {
+  .hide-on-mobile { display: none !important; }
+}
+
+@media (min-width: 768px) {
+  .show-on-mobile-only { display: none !important; }
 }

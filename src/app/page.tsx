@@ -10,7 +10,7 @@ import { MapContainerLazy } from "@/components/map/MapContainerLazy";
 import { CopyLinkButton } from "@/components/planner/CopyLinkButton";
 import { saveRecentPlace } from "@/lib/storage";
 import { RoutesResponse } from "@/lib/schemas";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Wind, Leaf, Zap } from "lucide-react";
 
 interface PanelContentProps {
   sheet: PlannerSheet;
@@ -31,12 +31,13 @@ function PanelContent({
 }: PanelContentProps) {
   if (sheet === "results" && routesResult) {
     return (
-      <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
+      <div className="flex-1 overflow-y-auto custom-scroll flex flex-col min-h-0 animate-fade-in">
         <ResultsPanel
           result={routesResult}
           onBack={onBackToSearch}
         />
-        <div className="px-4 pb-4 pt-2 border-t border-slate-100 flex justify-end shrink-0">
+        <div className="px-4 pb-4 pt-2 border-t border-slate-100 flex items-center justify-between shrink-0">
+          <p className="text-xs text-slate-400">Share this route</p>
           <CopyLinkButton />
         </div>
       </div>
@@ -44,35 +45,80 @@ function PanelContent({
   }
 
   return (
-    <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
-      <div className="p-4 sm:p-5 border-b border-slate-100 shrink-0">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-semibold mb-2">
-          <Sparkles className="w-3.5 h-3.5 text-teal-600" aria-hidden />
-          <span>Eco-Route Walking Navigation</span>
+    <div className="flex-1 overflow-y-auto custom-scroll flex flex-col min-h-0">
+      {/* Hero header */}
+      <div className="p-5 sm:p-6 shrink-0 relative overflow-hidden">
+        {/* Subtle background decoration */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 100% 80% at 50% -20%, rgba(13,148,136,0.06) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative">
+          {/* Eco badge */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-semibold mb-3 select-none">
+            <Sparkles className="w-3 h-3 text-teal-500" aria-hidden />
+            <span>Eco-Route Walking Navigation</span>
+          </div>
+
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-2 leading-tight">
+            Plan your{" "}
+            <span className="gradient-text">clean-air</span>{" "}
+            walk
+          </h1>
+          <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
+            Compare pedestrian routes scored by real-time air quality and road proximity.
+          </p>
+
+          {/* Feature pills */}
+          <div className="flex items-center gap-2 mt-4 flex-wrap">
+            {[
+              { icon: Zap, label: "Fastest", color: "text-blue-600", bg: "bg-blue-50" },
+              { icon: Leaf, label: "Cleanest", color: "text-teal-700", bg: "bg-teal-50" },
+              { icon: Wind, label: "Balanced", color: "text-violet-600", bg: "bg-violet-50" },
+            ].map(({ icon: Icon, label, color, bg }) => (
+              <span
+                key={label}
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium ${bg} ${color}`}
+              >
+                <Icon className="w-2.5 h-2.5" aria-hidden />
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
-        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 mb-1">
-          Plan your clean-air walk
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-          Compare pedestrian routes scored by real-time air quality and road traffic proximity.
-        </p>
       </div>
 
+      {/* Divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent mx-5" />
+
+      {/* Search form */}
       <div className="p-4 sm:p-5 flex flex-col gap-4 flex-1">
         <SearchForm onSubmit={onSearch} isLoading={isLoadingRoutes} />
 
+        {/* Error state */}
         {routeError && (
           <div
             role="alert"
-            className="p-3 rounded-xl bg-red-50 border border-red-200 text-sm text-red-700"
+            className="animate-fade-in p-3.5 rounded-xl bg-red-50 border border-red-200 text-sm text-red-700 flex items-start gap-2.5"
           >
-            {routeError}
+            <svg className="w-4 h-4 shrink-0 mt-0.5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+            <span>{routeError}</span>
           </div>
         )}
 
+        {/* Footer credit */}
         <div className="mt-auto pt-4 text-xs text-slate-400 border-t border-slate-100 flex items-center justify-between shrink-0">
-          <span>Powered by OSM &amp; Open-Meteo</span>
-          <span className="tabular-nums">v1.0.0</span>
+          <span className="flex items-center gap-1">
+            <span className="live-dot" aria-hidden />
+            Powered by OSM &amp; Open-Meteo
+          </span>
+          <span className="tabular-nums font-mono">v1.0.0</span>
         </div>
       </div>
     </div>
@@ -138,11 +184,12 @@ function PlannerContent() {
       id="main-content"
       className="flex-1 flex flex-col lg:flex-row h-[calc(100dvh-3.5rem)] relative overflow-hidden"
     >
-      {/* ── Desktop Side Panel (Hidden on Mobile/Tablet, visible >= 1024px) ── */}
+      {/* ── Desktop Side Panel ────────────────────────────────────── */}
       <aside
         id="results-panel"
         aria-label="Trip Planner & Routes"
-        className="hidden lg:flex lg:w-[420px] xl:w-[460px] shrink-0 bg-white border-r border-slate-200 flex-col h-full overflow-hidden z-10 shadow-xs"
+        className="hidden lg:flex lg:w-[400px] xl:w-[440px] shrink-0 bg-white border-r border-slate-200 flex-col h-full overflow-hidden z-10"
+        style={{ boxShadow: "2px 0 16px -4px rgba(0,0,0,0.06)" }}
       >
         <PanelContent
           sheet={sheet}
@@ -154,7 +201,7 @@ function PlannerContent() {
         />
       </aside>
 
-      {/* ── Interactive Map Viewport (Fills screen on mobile & fills right column on desktop) ── */}
+      {/* ── Interactive Map ──────────────────────────────────────── */}
       <section
         id="map-section"
         aria-label="Interactive Route Map"
@@ -163,7 +210,7 @@ function PlannerContent() {
         <MapContainerLazy />
       </section>
 
-      {/* ── Mobile & Tablet Bottom Sheet (Visible < 1024px) ── */}
+      {/* ── Mobile / Tablet Bottom Sheet ────────────────────────── */}
       <MobileSheet>
         <PanelContent
           sheet={sheet}
